@@ -11,7 +11,7 @@
         public string Password { get; set; }
         public string Type { get; set; }
 
-        public Category? Category { get; set; }
+        public Category Category { get; set; }
         public IEnumerable<Book> EBooks { get; set; }
 
         public User() => EBooks = new List<Book>();
