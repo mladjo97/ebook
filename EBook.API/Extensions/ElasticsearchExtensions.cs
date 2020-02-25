@@ -19,7 +19,8 @@
             var settings = new ConnectionSettings(new Uri(url))
                 .DefaultIndex(defaultIndex);
 
-            var client = new ElasticClient(settings);
+            var client = new ElasticClient(settings)
+                .ConfigureMappings();
 
             services.AddSingleton<IElasticClient>(client);
         }
