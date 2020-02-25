@@ -1,22 +1,22 @@
-﻿// @TODO:
-// - Change return types on /login endpoint
-
-namespace EBook.API.Controllers
+﻿namespace EBook.API.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using EBook.Services.Contracts;
-    using System.Threading.Tasks;
     using EBook.API.Models.Dto;
-    using System;
+    using EBook.Services.Contracts;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly ITokenService _tokenService;
 
-        public AuthController(IAuthService authService)
-            => _authService = authService;
+        public AuthController(IAuthService authService, ITokenService tokenService)
+        {
+            _authService = authService;
+            _tokenService = tokenService;
+        }
 
         [Route("login")]
         public async Task<IActionResult> Login([FromBody]LoginInfoDto loginInfo)
@@ -24,21 +24,13 @@ namespace EBook.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest("Login information is not valid.");
 
-            try
-            {
-                var auth = await _authService.Authenticate(loginInfo.Username, loginInfo.Password);
-                if (!auth)
-                    return BadRequest();
+            var auth = await _authService.Authenticate(loginInfo.Username, loginInfo.Password);
+            if (!auth)
+                return Unauthorized();
 
-                // @TODO:
-                // - Generate token
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var token = _tokenService.GenerateToken();
 
-            return Ok();
+            return Ok(token);
         }
 
     }
