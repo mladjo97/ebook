@@ -8,7 +8,7 @@ namespace EBook.API.Extensions
     {
         public static IElasticClient ConfigureMappings(this IElasticClient client)
         {
-            var indexSettings = new IndexSettings
+            var indexSettings = new IndexSettings()
             {
                 NumberOfReplicas = 0,
                 NumberOfShards = 1
@@ -16,11 +16,27 @@ namespace EBook.API.Extensions
 
             // @TODO:
             // - Research mappings between multiple indexes
-            // - Should the models be like sql or nosql
-            // - Reference loop
-            client.Indices.Create("ebooks", c => c.Map<Book>(m => m.AutoMap()));
-            client.Indices.Create("categories", c => c.Map<Category>(m => m.AutoMap()));
-            client.Indices.Create("languages", c => c.Map<Language>(m => m.AutoMap()));
+            var res = client.Indices.Create("ebooks", c => c
+                .Settings(s => s
+                    .Analysis(a => a
+                        .Analyzers(aa => aa
+                            .Standard("standard_english", sa => sa
+                                .StopWords("_english_") // should we exclude 'The', 'and' etc. from ebook title?
+                            )
+                        )
+                    )
+                )
+                .Map<Book>(m => m
+                    .AutoMap()
+                    .Properties(p => p
+                        .Text(t => t
+                            .Name(n => n.Title)
+                            .Analyzer("standard_english")
+                        )
+                    )
+                )
+            );
+
             client.Indices.Create("users", c => c.Map<User>(m => m.AutoMap()));
 
             return client;

@@ -19,7 +19,7 @@ namespace EBook.API.Controllers
             => _authService = authService;
 
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody]LoginViewModel loginInfo)
+        public async Task<IActionResult> Login([FromBody]LoginInfoDto loginInfo)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Login information is not valid.");

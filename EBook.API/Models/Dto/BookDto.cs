@@ -1,8 +1,6 @@
-﻿// Added DTO objects in API project for simplicity
-
-namespace EBook.API.Models.Dto
+﻿namespace EBook.API.Models.Dto
 {
-    public class BookViewModel
+    public class BookDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,7 +10,7 @@ namespace EBook.API.Models.Dto
         public string Filename { get; set; }
         public string Mime { get; set; }
 
-        public CategoryViewModel Category { get; set; }
-        public LanguageViewModel Language { get; set; }
+        public CategoryDto Category { get; set; }
+        public LanguageDto Language { get; set; }
     }
 }

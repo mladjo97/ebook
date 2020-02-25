@@ -1,0 +1,10 @@
+{"index": { "_id":"1" } }
+{"title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "category": {"id": 1, "name": "Drama"}, "keywords": "the great gatsby classic novel", "language": {"id": 1, "name": "English"}}
+{"index": { "_id":"2" } }
+{"title": "Catch-22", "author": "Joseph Heller", "category": {"id": 2, "name": "War"}, "keywords": "war catch 22 comedy drama", "language": {"id": 1, "name": "English"}}
+{"index": { "_id":"3" } }
+{"title": "The Lord of the Rings", "author": "J.R.R. Tolkien", "category": {"id": 3, "name": "Fantasy"}, "keywords": "lord of the rings fantasy gandalf classic", "language": {"id": 1, "name": "English"}}
+{"index": { "_id":"4" } }
+{"title": "Clash of Kings", "author": "George R.R. Martin", "category": {"id": 3, "name": "Fantasy"}, "keywords": "song of ice and fire fantasy clash of kings winter is coming", "language": {"id": 1, "name": "English"}}
+{"index": { "_id":"5" } }
+{"title": "War and Peace", "author": "Leo Tolstoy", "category": {"id": 1, "name": "Drama"}, "keywords": "war and peace russian author", "language": {"id": 1, "name": "English"}}

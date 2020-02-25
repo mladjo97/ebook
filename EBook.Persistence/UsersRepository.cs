@@ -1,5 +1,6 @@
 ﻿// @TODO:
 // - Create custom exceptions for elasticsearch
+// - Do we use elastic as a db in this project or ?
 
 namespace EBook.Persistence
 {
@@ -68,7 +69,7 @@ namespace EBook.Persistence
         }
 
         public async Task<User> GetByUsername(string username)
-        {
+        { 
             var response = await _client.SearchAsync<User>(s => s
                 .Index(GetIndex())
                 .Query(q => q

@@ -1,6 +1,6 @@
 ﻿namespace EBook.API.Models.Dto
 {
-    public class RegisterViewModel
+    public class RegisterInfoDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

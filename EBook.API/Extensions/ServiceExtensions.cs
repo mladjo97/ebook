@@ -67,11 +67,14 @@
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IEBooksRepository, EBooksRepository>();
         }
 
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthenticationService>();
+            services.AddScoped<IEBooksService, EBooksService>();
+            services.AddScoped<ITokenService, TokenService>();
         }
     }
 }
