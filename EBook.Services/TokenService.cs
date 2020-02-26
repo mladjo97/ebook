@@ -8,7 +8,6 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
-    using System.Threading.Tasks;
 
     public class TokenService : ITokenService
     {
@@ -24,13 +23,13 @@
 
         public string GenerateToken()
         {
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["jwt:secretKey"]));
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GetJwtSecretKey()));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
             var tokenOptions = new JwtSecurityToken(
-                issuer: _config["jwt:issuer"],
-                audience: _config["jwt:audience"],
+                issuer: GetJwtIssuer(),
                 claims: new List<Claim>(),
+                audience: GetJwtAudience(),
                 expires: DateTime.Now.AddDays(7),
                 signingCredentials: signinCredentials
             );
