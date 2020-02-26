@@ -3,28 +3,46 @@
 ## Search
 
 ### Search functions:
-
 - Match search:  
-`SearchByTitle(string title)`  
-`SearchByAuthor(string author)`  
-`SearchByKeywords(string keywords)`  
-`SearchByCategory(string category)`  
-`SearchByLanguage(string language)`  
+`Search(IEBookSearchOptions options)`  
 
 - Fuzzy search:  
-`FuzzySearchByTitle(string title)`  
-`FuzzySearchByAuthor(string author)`  
-`FuzzySearchByKeywords(string keywords)`  
-`FuzzySearchByCategory(string category)`  
-`FuzzySearchByLanguage(string language)`  
+`FuzzySearch(IEBookSearchOptions options)`  
+
+> On `feature/full-search` branch: 
+> - Match search:  
+> `SearchByTitle(string title)`  
+> `SearchByAuthor(string author)`  
+> `SearchByKeywords(string keywords)`  
+> `SearchByCategory(string category)`  
+> `SearchByLanguage(string language)`  
+>
+> - Fuzzy search:  
+> `FuzzySearchByTitle(string title)`  
+> `FuzzySearchByAuthor(string author)`  
+> `FuzzySearchByKeywords(string keywords)`  
+> `FuzzySearchByCategory(string category)`  
+> `FuzzySearchByLanguage(string language)`  
+
+### Search Options  
+```
+public interface IEBookSearchOptions
+{
+    string Title { get; set; }
+    string Author { get; set; }
+    string Keywords { get; set; }
+    string Language { get; set; }
+    string Category { get; set; }
+}
+```
 
 ### Example search requests
 
 Without fuzzy search:  
-`GET /ebooks/search?title=the great gatsby`  
+`GET /ebooks/search?title=the great gatsby&language=english`  
 
 With fuzzy search:  
-`GET /ebooks/search?title=the graet gatby&fuzzy=true`
+`GET /ebooks/search?title=the graet gatby&language=eglish&fuzzy=true`
 
 ## Filter
 
@@ -37,7 +55,7 @@ With fuzzy search:
 
 ### Filter Options  
 ```
-public interface IEBooksFilterOptions
+public interface IEBookFilterOptions
 {
     string Title { get; set; }
     string Author { get; set; }

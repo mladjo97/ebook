@@ -1,14 +1,13 @@
 ﻿// @TODO:
 // - File too long
 // - Separate to EBooksMatchService and EBooksFuzzyService ?
-// - or EBooksSearchService and EBooksFilterService ?
 
 namespace EBook.Services
 {
     using EBook.Domain;
     using EBook.Persistence.Contracts;
     using EBook.Services.Contracts;
-    using EBook.Services.Contracts.Filter;
+    using EBook.Services.Contracts.Query;
     using EBook.Services.Queries;
     using EBook.Services.Queries.Fuzzy;
     using EBook.Services.Queries.Match;
@@ -16,11 +15,11 @@ namespace EBook.Services
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class EBooksService : IEBooksService
+    public class EBooksSearchService : IEBooksSearchService
     {
         private readonly IEBooksRepository _eBooksRepository;
 
-        public EBooksService(IEBooksRepository eBooksRepository)
+        public EBooksSearchService(IEBooksRepository eBooksRepository)
             => _eBooksRepository = eBooksRepository;
 
         public async Task<IEnumerable<Book>> SearchByAuthor(string author)
@@ -81,14 +80,9 @@ namespace EBook.Services
         {
             var searchByTitleFuzzyQuery = new EBookTitleFuzzyQuery(title);
             return await Search(searchByTitleFuzzyQuery);
-        }        
+        }
 
-        /// <summary>
-        /// E-Book filter function (multi-field match search)
-        /// </summary>
-        /// <param name="options">Filter options for E-Books</param>
-        /// <returns>Collection of E-Books that fulfil the filter reqs</returns>
-        public async Task<IEnumerable<Book>> Filter(IEBooksFilterOptions options)
+        public async Task<IEnumerable<Book>> Search(IEBookSearchOptions options)
         {
             var filterQueries = new List<SearchRequestSpecification<Book>>();
 
@@ -107,19 +101,12 @@ namespace EBook.Services
             if (!string.IsNullOrEmpty(options.Keywords))
                 filterQueries.Add(new EBookKeywordsQuery(options.Keywords));
 
-            // which one to use here ?
-            // AND or OR or a combination ?
-            var orQuery = new OrSearchRequestSpecification<Book>(filterQueries);
+            var andQuery = new AndSearchRequestSpecification<Book>(filterQueries);
 
-            return await Search(orQuery);
+            return await Search(andQuery);
         }
 
-        /// <summary>
-        /// E-Book filter function (multi-field fuzzy search)
-        /// </summary>
-        /// <param name="options">Filter options for E-Books</param>
-        /// <returns>Collection of E-Books that fulfil the filter reqs</returns>
-        public async Task<IEnumerable<Book>> FuzzyFilter(IEBooksFilterOptions options)
+        public async Task<IEnumerable<Book>> FuzzySearch(IEBookSearchOptions options)
         {
             var filterQueries = new List<SearchRequestSpecification<Book>>();
 
@@ -138,11 +125,9 @@ namespace EBook.Services
             if (!string.IsNullOrEmpty(options.Keywords))
                 filterQueries.Add(new EBookKeywordsFuzzyQuery(options.Keywords));
 
-            // which one to use here ?
-            // AND or OR or a combination ?
-            var orQuery = new OrSearchRequestSpecification<Book>(filterQueries);
+            var andQuery = new AndSearchRequestSpecification<Book>(filterQueries);
 
-            return await Search(orQuery);
+            return await Search(andQuery);
         }
 
         private async Task<IEnumerable<Book>> Search(SearchRequestSpecification<Book> query)

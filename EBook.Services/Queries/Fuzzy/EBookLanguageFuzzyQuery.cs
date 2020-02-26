@@ -1,4 +1,4 @@
-﻿namespace EBook.Services.Queries.Match
+﻿namespace EBook.Services.Queries.Fuzzy
 {
     using EBook.Domain;
     using Nest;

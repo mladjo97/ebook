@@ -1,6 +1,6 @@
-﻿namespace EBook.Services.Contracts.Filter
+﻿namespace EBook.Services.Contracts.Query
 {
-    public interface IEBooksFilterOptions
+    public interface IEBookSearchOptions
     {
         string Title { get; set; }
         string Author { get; set; }

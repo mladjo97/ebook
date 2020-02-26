@@ -1,0 +1,6 @@
+﻿- "Kombinacija prethodnih parametara pretrage (BooleanQuery, omogućiti i AND i
+  OR operator između polja)"
+  
+  Sta je ideja tu? Ja sam ovo preko /filter omogucio, ali da li bi bilo dobro da 
+  postoji i poseban endpoint kao /filter, samo za SearchOptions i da bude AND, umesto
+  OR?

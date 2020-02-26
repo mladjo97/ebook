@@ -1,8 +1,8 @@
 ﻿namespace EBook.API.Models
 {
-    using EBook.Services.Contracts.Filter;
+    using EBook.Services.Contracts.Query;
 
-    public class EBookFilterOptions : IEBookFilterOptions
+    public class EBookSearchOptions : IEBookSearchOptions
     {
         public string Title { get; set; }
         public string Author { get; set; }

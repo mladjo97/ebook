@@ -73,8 +73,10 @@
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthenticationService>();
-            services.AddScoped<IEBooksService, EBooksService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IEBooksSearchService, EBooksSearchService>();
+            services.AddScoped<IEBooksFilterService, EBooksFilterService>();
+            services.AddScoped<IEBookServicesWrapper>();
         }
     }
 }

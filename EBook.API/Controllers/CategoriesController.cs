@@ -14,9 +14,9 @@
         private readonly List<CategoryDto> _categories;
 
         private readonly IMapper _mapper;
-        private readonly IEBooksService _eBooksService;
+        private readonly IEBooksSearchService _eBooksService;
 
-        public CategoriesController(IMapper mapper, IEBooksService eBooksService)
+        public CategoriesController(IMapper mapper, IEBooksSearchService eBooksService)
         {
             _mapper = mapper;
             _eBooksService = eBooksService;

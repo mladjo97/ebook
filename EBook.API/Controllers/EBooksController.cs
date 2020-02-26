@@ -13,30 +13,12 @@
     public class EBooksController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IEBooksService _eBooksService;
+        private readonly IEBookServicesWrapper _eBookServices;
 
-        public EBooksController(IMapper mapper, IEBooksService eBooksService)
+        public EBooksController(IMapper mapper, IEBookServicesWrapper eBookServices)
         {
             _mapper = mapper;
-            _eBooksService = eBooksService;
-        }
-
-        [HttpGet]
-        [Route("search")]
-        public async Task<IActionResult> SearchByTitle([FromQuery]string title, [FromQuery]bool fuzzy = false)
-        {
-            if (string.IsNullOrEmpty(title))
-                return BadRequest();
-
-            // @TODO:
-            // - Replace if statement with a map
-            var books = fuzzy
-                ? await _eBooksService.FuzzySearchByTitle(title)
-                : await _eBooksService.SearchByTitle(title);
-
-            var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
-
-            return Ok(booksDto);
+            _eBookServices = eBookServices;
         }
 
         [HttpGet]
@@ -49,12 +31,31 @@
             // @TODO:
             // - Replace if statement with a map
             var books = fuzzy
-                ? await _eBooksService.FuzzyFilter(options)
-                : await _eBooksService.Filter(options);
+                ? await _eBookServices.FilterService.FuzzyFilter(options)
+                : await _eBookServices.FilterService.Filter(options);
 
             var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
 
             return Ok(booksDto);
         }
+
+        [HttpGet]
+        [Route("search")]
+        public async Task<IActionResult> Search([FromQuery]EBookSearchOptions options, [FromQuery]bool fuzzy = false)
+        {
+            if (options == null)
+                return BadRequest();
+
+            // @TODO:
+            // - Replace if statement with a map
+            var books = fuzzy
+                ? await _eBookServices.SearchService.FuzzySearch(options)
+                : await _eBookServices.SearchService.Search(options);
+
+            var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
+
+            return Ok(booksDto);
+        }
+
     }
 }
