@@ -7,13 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBook.API", "EBook.API\EBoo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBook.Domain", "EBook.Domain\EBook.Domain.csproj", "{14BD7CE5-BEFB-4D0C-A270-3D0139EF5DC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBook.Services.Contracts", "EBook.Services.Contracts\EBook.Services.Contracts.csproj", "{976FB9EF-1C1F-45D8-A671-24C8CF0363A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBook.Services.Contracts", "EBook.Services.Contracts\EBook.Services.Contracts.csproj", "{976FB9EF-1C1F-45D8-A671-24C8CF0363A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBook.Persistence.Contracts", "EBook.Persistence.Contracts\EBook.Persistence.Contracts.csproj", "{BA148A4C-CD8A-4940-9BE3-AE8B9BD07041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBook.Persistence.Contracts", "EBook.Persistence.Contracts\EBook.Persistence.Contracts.csproj", "{BA148A4C-CD8A-4940-9BE3-AE8B9BD07041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBook.Persistence", "EBook.Persistence\EBook.Persistence.csproj", "{F601A4B0-4298-4D5A-883D-8718D4761544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBook.Persistence", "EBook.Persistence\EBook.Persistence.csproj", "{F601A4B0-4298-4D5A-883D-8718D4761544}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBook.Services", "EBook.Services\EBook.Services.csproj", "{C11B2090-C185-4E8D-AD8A-09DAD4EF2AF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBook.Services", "EBook.Services\EBook.Services.csproj", "{C11B2090-C185-4E8D-AD8A-09DAD4EF2AF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3681F8FB-D4A2-490B-8A24-673766BB6847}"
+	ProjectSection(SolutionItems) = preProject
+		pitanja.txt = pitanja.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

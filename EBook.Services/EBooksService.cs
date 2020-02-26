@@ -22,6 +22,13 @@
             return await Search(searchByAuthorQuery);
         }
 
+        public async Task<IEnumerable<Book>> SearchByCategory(string category)
+        {
+            var searchByCategoryQuery = new EBookCategorySearchQuery(category);
+
+            return await Search(searchByCategoryQuery);
+        }
+
         public async Task<IEnumerable<Book>> SearchByKeywords(string keywords)
         {
             var searchByKeywordsQuery = new EBookKeywordsSearchQuery(keywords);
@@ -31,7 +38,7 @@
 
         public async Task<IEnumerable<Book>> SearchByLanguage(string language)
         {
-            var searchByLanguageQuery = new EBookLanguageQuery(language);
+            var searchByLanguageQuery = new EBookLanguageSearchQuery(language);
 
             return await Search(searchByLanguageQuery);
         }
@@ -40,7 +47,7 @@
         {
             // this is a quick test, not the actual implementation
             var searchByTitleQuery = new EBookTitleSearchQuery(title);
-            var searchByLanguageQuery = new EBookLanguageQuery("Serbian");
+            var searchByLanguageQuery = new EBookLanguageSearchQuery("Serbian");
 
             var andQuery = new AndSearchRequestSpecification<Book>(
                 new List<SearchRequestSpecification<Book>>

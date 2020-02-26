@@ -13,5 +13,6 @@
         Task<IEnumerable<Book>> SearchByAuthor(string author);
         Task<IEnumerable<Book>> SearchByKeywords(string keywords);
         Task<IEnumerable<Book>> SearchByLanguage(string language);
+        Task<IEnumerable<Book>> SearchByCategory(string category);
     }
 }

@@ -4,11 +4,11 @@
     using Nest;
     using System;
 
-    public class EBookLanguageQuery : SearchRequestSpecification<Book>
+    public class EBookLanguageSearchQuery : SearchRequestSpecification<Book>
     {
         private readonly string _language;
 
-        public EBookLanguageQuery(string language)
+        public EBookLanguageSearchQuery(string language)
             => _language = language ?? throw new ArgumentNullException($"{nameof(language)} cannot be null.");
 
         // @TODO:
