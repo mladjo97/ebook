@@ -18,6 +18,21 @@
         private static string SecretConfigKey = "secret";
         private static string AudienceConfigKey = "audience";
 
+        public static void AddServices(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthService, AuthenticationService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IEBooksSearchService, EBooksSearchService>();
+            services.AddScoped<IEBooksFilterService, EBooksFilterService>();
+            services.AddScoped<IEBookServicesWrapper, EBookServicesWrapper>();
+        }
+
+        public static void AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IEBooksRepository, EBooksRepository>();
+        }
+
         public static void ConfigureCors(this IServiceCollection services)
             => services.AddCors(options =>
             {
@@ -64,19 +79,5 @@
                 });
         }
 
-        public static void AddRepositories(this IServiceCollection services)
-        {
-            services.AddScoped<IUsersRepository, UsersRepository>();
-            services.AddScoped<IEBooksRepository, EBooksRepository>();
-        }
-
-        public static void AddServices(this IServiceCollection services)
-        {
-            services.AddScoped<IAuthService, AuthenticationService>();
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IEBooksSearchService, EBooksSearchService>();
-            services.AddScoped<IEBooksFilterService, EBooksFilterService>();
-            services.AddScoped<IEBookServicesWrapper>();
-        }
     }
 }
