@@ -12,6 +12,7 @@
 
             // @TODO:
             // - Add custom exception handlers
+            // - Change to custom messages, not exception errors
 
             var result = JsonConvert.SerializeObject(new { context.HttpContext.Response.StatusCode, Error = exception.Message });
 

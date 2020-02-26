@@ -1,6 +1,7 @@
 ﻿namespace EBook.API.Controllers
 {
     using AutoMapper;
+    using EBook.API.Models;
     using EBook.API.Models.Dto;
     using EBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,11 @@
         public async Task<IActionResult> Get()
         {
             foreach (var category in _categories)
-                category.EBooks = _mapper.Map<IEnumerable<BookDto>>(await _eBooksService.SearchByCategory(category.Name));
+                category.EBooks = _mapper.Map<IEnumerable<BookDto>>(
+                    await _eBooksService.Search(
+                            new EBookSearchOptions { Category = category.Name }
+                        )
+                    );
 
             return Ok(_categories);
         }
@@ -45,7 +50,11 @@
             var categories = _categories.FindAll(cat => cat.Id == id);
 
             foreach (var category in categories)
-                category.EBooks = _mapper.Map<IEnumerable<BookDto>>(await _eBooksService.SearchByCategory(category.Name));
+                category.EBooks = _mapper.Map<IEnumerable<BookDto>>(
+                    await _eBooksService.Search(
+                            new EBookSearchOptions { Category = category.Name }
+                        )
+                    );
 
             return Ok(categories);
         }

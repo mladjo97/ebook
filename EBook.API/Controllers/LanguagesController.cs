@@ -1,6 +1,7 @@
 ﻿namespace EBook.API.Controllers
 {
     using AutoMapper;
+    using EBook.API.Models;
     using EBook.API.Models.Dto;
     using EBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@
             _languages = new List<LanguageDto>
             {
                 new LanguageDto { Id = 1, Name = "English" },
-                new LanguageDto { Id = 2, Name = null }
+                new LanguageDto { Id = 2, Name = "English" }
             };
         }
 
@@ -32,7 +33,11 @@
         public async Task<IActionResult> Get()
         {
             foreach (var lang in _languages)
-                lang.EBooks = _mapper.Map<IEnumerable<BookDto>>(await _eBooksService.SearchByLanguage(lang.Name));
+                lang.EBooks = _mapper.Map<IEnumerable<BookDto>>(
+                    await _eBooksService.Search(
+                            new EBookSearchOptions { Language = lang.Name }
+                        )
+                    );
 
             return Ok(_languages);
         }
@@ -44,7 +49,11 @@
             var languages = _languages.FindAll(lang => lang.Id == id);
 
             foreach(var lang in languages)
-                lang.EBooks = _mapper.Map<IEnumerable<BookDto>>(await _eBooksService.SearchByLanguage(lang.Name));
+                lang.EBooks = _mapper.Map<IEnumerable<BookDto>>(
+                    await _eBooksService.Search(
+                            new EBookSearchOptions { Language = lang.Name }
+                        )
+                    );
 
             return Ok(languages);
         }
