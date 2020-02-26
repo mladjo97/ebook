@@ -2,7 +2,7 @@
 
 ## Search
 
-Search uses Boolean **AND** Query for all given query options.  
+Search uses Boolean *AND* Query for all given query options.  
 If your search is based on multiple fields, it will only result in a single matching e-book result.
 
 ### Search functions:
@@ -50,7 +50,7 @@ With fuzzy search:
 
 ## Filter
 
-Filter uses Boolean **OR** Query for all given query options.  
+Filter uses Boolean *OR* Query for all given query options.  
 Your filter can be based on multiple fields and it will result in all matching e-books.
 
 ### Filter functions:  
