@@ -47,17 +47,8 @@
         {
             // this is a quick test, not the actual implementation
             var searchByTitleQuery = new EBookTitleSearchQuery(title);
-            var searchByLanguageQuery = new EBookLanguageSearchQuery("Serbian");
 
-            var andQuery = new AndSearchRequestSpecification<Book>(
-                new List<SearchRequestSpecification<Book>>
-                {
-                    searchByTitleQuery,
-                    searchByLanguageQuery,
-                }
-            );
-
-            return await Search(andQuery);
+            return await Search(searchByTitleQuery);
         }
 
         private async Task<IEnumerable<Book>> Search(SearchRequestSpecification<Book> query)
