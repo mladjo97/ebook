@@ -2,7 +2,7 @@
 
 ## Search
 
-Search functions:
+### Search functions:
 
 - Match search:  
 `SearchByTitle(string title)`  
@@ -28,7 +28,7 @@ With fuzzy search:
 
 ## Filter
 
-Filter function:  
+### Filter functions:  
 - Match filter:  
 `Filter(IEBooksFilterOptions options)`  
 
