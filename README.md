@@ -1,4 +1,4 @@
-# E-Book Repository 
+# E-Book Repository API
 
 ## Search
 
