@@ -1,14 +1,14 @@
-﻿namespace EBook.Services.Queries
+﻿namespace EBook.Services.Queries.Match
 {
     using EBook.Domain;
     using Nest;
     using System;
 
-    public class EBookCategorySearchQuery : SearchRequestSpecification<Book>
+    public class EBookCategoryQuery : SearchRequestSpecification<Book>
     {
         private readonly string _category;
 
-        public EBookCategorySearchQuery(string category)
+        public EBookCategoryQuery(string category)
             => _category = category ?? throw new ArgumentNullException($"{nameof(category)} cannot be null.");
 
         public override ISearchRequest<Book> IsSatisfiedBy()

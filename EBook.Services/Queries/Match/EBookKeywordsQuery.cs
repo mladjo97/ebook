@@ -1,14 +1,14 @@
-﻿namespace EBook.Services.Queries
+﻿namespace EBook.Services.Queries.Match
 {
     using EBook.Domain;
     using Nest;
     using System;
 
-    public class EBookKeywordsSearchQuery : SearchRequestSpecification<Book>
+    public class EBookKeywordsQuery : SearchRequestSpecification<Book>
     {
         private readonly string _keywords;
 
-        public EBookKeywordsSearchQuery(string keywords)
+        public EBookKeywordsQuery(string keywords)
             => _keywords = keywords ?? throw new ArgumentNullException($"{nameof(keywords)} cannot be null.");
 
         // @TODO:

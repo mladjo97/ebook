@@ -12,7 +12,8 @@
                     .Analysis(a => a
                         .Analyzers(aa => aa
                             .Standard("standard_english", sa => sa
-                                .StopWords("_english_") // should we exclude 'The', 'and' etc. from ebook title?
+                                // should we exclude 'The', 'and' etc. from ebook title?
+                                .StopWords("_english_")
                             )
                         )
                     )
@@ -23,6 +24,14 @@
                         .Text(t => t
                             .Name(n => n.Title)
                             .Analyzer("standard_english")
+                        )
+                        .Text(t => t
+                            .Name(n => n.Author)
+                            .Analyzer("standard_english")
+                        )
+                        .Text(t => t
+                             .Name(n => n.Keywords)
+                             .Analyzer("standard_english")
                         )
                         .Number(n => n
                             .Name(na => na.Id)

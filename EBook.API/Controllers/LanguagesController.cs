@@ -24,7 +24,7 @@
             _languages = new List<LanguageDto>
             {
                 new LanguageDto { Id = 1, Name = "English" },
-                new LanguageDto { Id = 2, Name = "Serbian" }
+                new LanguageDto { Id = 2, Name = null }
             };
         }
 

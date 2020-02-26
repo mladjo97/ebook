@@ -1,14 +1,14 @@
-﻿namespace EBook.Services.Queries
+﻿namespace EBook.Services.Queries.Match
 {
     using EBook.Domain;
     using Nest;
     using System;
 
-    public class EBookLanguageSearchQuery : SearchRequestSpecification<Book>
+    public class EBookLanguageFuzzyQuery : SearchRequestSpecification<Book>
     {
         private readonly string _language;
 
-        public EBookLanguageSearchQuery(string language)
+        public EBookLanguageFuzzyQuery(string language)
             => _language = language ?? throw new ArgumentNullException($"{nameof(language)} cannot be null.");
 
         // @TODO:
@@ -20,6 +20,7 @@
                     .Match(m => m
                         .Field(f => f.Language.Name)
                         .Query(_language)
+                        .Fuzziness(Fuzziness.Auto)
                     )
                 );
     }

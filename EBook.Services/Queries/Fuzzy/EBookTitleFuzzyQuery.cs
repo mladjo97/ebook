@@ -1,14 +1,14 @@
-﻿namespace EBook.Services.Queries
+﻿namespace EBook.Services.Queries.Fuzzy
 {
     using EBook.Domain;
     using Nest;
     using System;
 
-    public class EBookTitleSearchQuery : SearchRequestSpecification<Book>
+    public class EBookTitleFuzzyQuery : SearchRequestSpecification<Book>
     {
         private readonly string _title;
 
-        public EBookTitleSearchQuery(string title)
+        public EBookTitleFuzzyQuery(string title)
             => _title = title ?? throw new ArgumentNullException($"{nameof(title)} cannot be null.");
 
         // @TODO:
@@ -20,6 +20,8 @@
                     .Match(m => m
                         .Field(f => f.Title)
                         .Query(_title)
+                        // @Reference: https://qbox.io/blog/elasticsearch-optimization-fuzziness-performance
+                        .Fuzziness(Fuzziness.Auto)
                     )
                 );
     }

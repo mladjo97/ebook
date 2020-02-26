@@ -1,3 +1,0 @@
-- Trenutno se Queries nalaze u Services projektu. Da li je bolje da se prebace u Persistence projekat?
-  Tako bi onda Persistence jedini imao Nest paket (pored API-a, IoC), a Services bi zavisio samo od Contract projekata.
-  Da li je to mozda bolje ili je ovo okej?
