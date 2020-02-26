@@ -1,6 +1,6 @@
-## E-Book Repository 
+# E-Book Repository 
 
-# Example queries
+## Example queries
 
 Without fuzzy search:
 `GET /ebooks?title=the great gatsby`
