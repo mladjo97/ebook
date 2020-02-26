@@ -21,7 +21,7 @@
                         .Field(f => f.Title)
                         .Query(_title)
                         // @Reference: https://qbox.io/blog/elasticsearch-optimization-fuzziness-performance
-                        .Fuzziness(Fuzziness.Auto)
+                        .Fuzziness(Fuzziness.EditDistance(3))
                     )
                 );
     }

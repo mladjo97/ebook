@@ -1,6 +1,7 @@
 ﻿namespace EBook.API.Controllers
 {
     using AutoMapper;
+    using EBook.API.Models;
     using EBook.API.Models.Dto;
     using EBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,28 @@
                 return BadRequest();
 
             // @TODO:
-            // - Replace if with a map
+            // - Replace if statement with a map
             var books = fuzzy
                 ? await _eBooksService.FuzzySearchByTitle(title)
                 : await _eBooksService.SearchByTitle(title);
+
+            var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
+
+            return Ok(booksDto);
+        }
+
+        [HttpGet]
+        [Route("filter")]
+        public async Task<IActionResult> Filter([FromQuery]EBookFilterOptions options, [FromQuery]bool fuzzy = false)
+        {
+            if (options == null)
+                return BadRequest();
+
+            // @TODO:
+            // - Replace if statement with a map
+            var books = fuzzy
+                ? await _eBooksService.FuzzyFilter(options)
+                : await _eBooksService.Filter(options);
 
             var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
 
