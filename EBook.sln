@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBook.Services", "EBook.Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3681F8FB-D4A2-490B-8A24-673766BB6847}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		ebooks-bulk.json = ebooks-bulk.json
+		ebooks.json = ebooks.json
+		elastic_bulk_formatter.py = elastic_bulk_formatter.py
 		pitanja.txt = pitanja.txt
 		README.md = README.md
 	EndProjectSection
