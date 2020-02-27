@@ -50,7 +50,7 @@ With fuzzy search:
 
 ## Filter
 
-Filter uses Boolean *OR* Query for all given query options.  
+Filter uses Boolean **OR** Query for all given query options.  
 Your filter can be based on multiple fields and it will result in all matching e-books.
 
 ### Filter functions:  
