@@ -8,18 +8,17 @@
 
     public static class ElasticsearchExtensions
     {
-        private static string ElasticsearchSectionKey = "elasticsearch";
-        private static string UrlKey = "url";
-
         public static void ConfigureElasticsearch(this IServiceCollection services, IConfiguration config)
         {
-            var url = config.GetSection(ElasticsearchSectionKey).GetValue<string>(UrlKey);
+            var url = config
+                .GetSection(ConfigurationSettings.ElasticsearchSectionKey)
+                .GetValue<string>(ConfigurationSettings.UrlKey);
 
             var settings = new ConnectionSettings(new Uri(url))
                 .ConfigureDefaultTypeIndexes(config);
 
             var client = new ElasticClient(settings)
-                .ConfigureMappings();
+                .ConfigureMappings(config);
 
             services.AddSingleton<IElasticClient>(client);
         }

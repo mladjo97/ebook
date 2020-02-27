@@ -13,10 +13,6 @@
 
     public static class ServiceExtensions
     {
-        private static string JwtConfigKey = "jwt";
-        private static string IssuerConfigKey = "issuer";
-        private static string SecretConfigKey = "secret";
-        private static string AudienceConfigKey = "audience";
 
         public static void AddServices(this IServiceCollection services)
         {
@@ -51,16 +47,22 @@
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = config.GetSection(JwtConfigKey).GetValue<string>(IssuerConfigKey),
+                        ValidIssuer = config
+                            .GetSection(ConfigurationSettings.JwtConfigKey)
+                            .GetValue<string>(ConfigurationSettings.IssuerConfigKey),
 
                         ValidateAudience = true,
-                        ValidAudience = config.GetSection(JwtConfigKey).GetValue<string>(AudienceConfigKey),
+                        ValidAudience = config
+                            .GetSection(ConfigurationSettings.JwtConfigKey)
+                            .GetValue<string>(ConfigurationSettings.AudienceConfigKey),
 
                         ValidateLifetime = true,
 
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(config.GetSection(JwtConfigKey).GetValue<string>(SecretConfigKey))
+                            Encoding.UTF8.GetBytes(config
+                                .GetSection(ConfigurationSettings.JwtConfigKey)
+                                .GetValue<string>(ConfigurationSettings.SecretConfigKey))
                         )
                     };
 

@@ -3,10 +3,11 @@
     using Nest;
     using EBook.API.Elasticsearch.Mappings;
     using EBook.Domain;
+    using Microsoft.Extensions.Configuration;
 
     public static class ElasticsearchMappingExtensions
     {
-        public static IElasticClient ConfigureMappings(this IElasticClient client)
+        public static IElasticClient ConfigureMappings(this IElasticClient client, IConfiguration config)
         { 
             var indexSettings = new IndexSettings()
             {
@@ -16,7 +17,7 @@
 
             // @TODO:
             // - Research mappings between multiple indexes
-            client.ConfigureEBookMapping();
+            client.ConfigureEBookMapping(config);
 
             // testing elasticsearch dynamic mapping
             client.Indices.Create("users", c => c.Map<User>(m => m.AutoMap()));

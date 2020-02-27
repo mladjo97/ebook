@@ -1,18 +1,22 @@
 ﻿namespace EBook.API.Elasticsearch.Mappings
 {
     using EBook.Domain;
+    using Microsoft.Extensions.Configuration;
     using Nest;
 
     public static class EBookMapping
     {
-        public static IElasticClient ConfigureEBookMapping(this IElasticClient client)
+        public static IElasticClient ConfigureEBookMapping(this IElasticClient client, IConfiguration config)
         {
-            client.Indices.Create("ebooks", c => c
+            var eBooksIndex = config
+                .GetSection(ConfigurationSettings.ElasticsearchSectionKey)
+                .GetValue<string>(ConfigurationSettings.EBooksIndexKey);
+
+            client.Indices.Create(eBooksIndex, c => c
                 .Settings(s => s
                     .Analysis(a => a
                         .Analyzers(aa => aa
                             .Standard("standard_english", sa => sa
-                                // should we exclude 'The', 'and' etc. from ebook title?
                                 .StopWords("_english_")
                             )
                         )
@@ -22,6 +26,7 @@
                     .AutoMap()
                     .Properties(p => p
                         .Text(t => t
+                            // should we exclude 'The', 'and' etc. from ebook title?
                             .Name(n => n.Title)
                             .Analyzer("standard_english")
                         )
