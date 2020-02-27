@@ -12,7 +12,7 @@
     public class TokenService : ITokenService
     {
         private const string JwtSectionKey = "jwt";
-        private const string JwtSecretKey = "secretKey";
+        private const string JwtSecretKey = "secret";
         private const string JwtIssuerKey = "issuer";
         private const string JwtAudienceKey = "audience";
 

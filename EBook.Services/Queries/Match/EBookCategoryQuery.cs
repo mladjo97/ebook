@@ -13,7 +13,6 @@
 
         public override ISearchRequest<Book> IsSatisfiedBy()
             => new SearchDescriptor<Book>()
-                .Index("ebooks")
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Category.Name)

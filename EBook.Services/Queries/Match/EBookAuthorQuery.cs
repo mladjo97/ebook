@@ -11,11 +11,8 @@
         public EBookAuthorQuery(string author)
             => _author = author ?? throw new ArgumentNullException($"{nameof(author)} cannot be null.");
 
-        // @TODO:
-        // - Remove "ebooks"
         public override ISearchRequest<Book> IsSatisfiedBy()
             => new SearchDescriptor<Book>()
-                .Index("ebooks")
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Author)

@@ -38,8 +38,9 @@
                 filterQueries.Add(new EBookKeywordsQuery(options.Keywords));
 
             var andQuery = new AndSearchRequestSpecification<Book>(filterQueries);
+            var higlightQuery = new HighlightSearchRequestSpecification<Book>(andQuery);
 
-            return await Search(andQuery);
+            return await Search(higlightQuery);
         }
 
         public async Task<IEnumerable<Book>> FuzzySearch(IEBookSearchOptions options)
@@ -62,8 +63,9 @@
                 filterQueries.Add(new EBookKeywordsFuzzyQuery(options.Keywords));
 
             var andQuery = new AndSearchRequestSpecification<Book>(filterQueries);
-
-            return await Search(andQuery);
+            var higlightQuery = new HighlightSearchRequestSpecification<Book>(andQuery);
+            
+            return await Search(higlightQuery);
         }
 
         private async Task<IEnumerable<Book>> Search(SearchRequestSpecification<Book> query)

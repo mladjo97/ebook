@@ -1,5 +1,6 @@
 ﻿namespace EBook.API.Extensions
 {
+    using EBook.API.Elasticsearch.Index;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Nest;
@@ -9,15 +10,13 @@
     {
         private static string ElasticsearchSectionKey = "elasticsearch";
         private static string UrlKey = "url";
-        private static string DefaultIndexKey = "defaultIndex";
 
         public static void ConfigureElasticsearch(this IServiceCollection services, IConfiguration config)
         {
             var url = config.GetSection(ElasticsearchSectionKey).GetValue<string>(UrlKey);
-            var defaultIndex = config.GetSection(ElasticsearchSectionKey).GetValue<string>(DefaultIndexKey);
 
             var settings = new ConnectionSettings(new Uri(url))
-                .DefaultIndex(defaultIndex);
+                .ConfigureDefaultTypeIndexes(config);
 
             var client = new ElasticClient(settings)
                 .ConfigureMappings();

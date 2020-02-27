@@ -4,3 +4,7 @@
   Sta je ideja tu? Ja sam ovo preko /filter omogucio, ali da li bi bilo dobro da 
   postoji i poseban endpoint kao /filter, samo za SearchOptions i da bude AND, umesto
   OR?
+
+- Kakva je praksa prilikom pretrage i povratka informacija? 
+  Npr. ako trazim knjige, da li se vracaju samo knjige iz funkcije repo-a ili treba
+  sve da se vrati ? (highlight, count, total ..)
