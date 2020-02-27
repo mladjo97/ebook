@@ -3,7 +3,7 @@
 ## Search
 
 Search uses Boolean *AND* Query for all given query options.  
-If your search is based on multiple fields, it will only result in a single e-book result.
+If your search is based on multiple fields, it will only result in a single matching e-book result.
 
 ### Search functions:
 - Match search:  
@@ -12,7 +12,8 @@ If your search is based on multiple fields, it will only result in a single e-bo
 - Fuzzy search:  
 `FuzzySearch(IEBookSearchOptions options)`  
 
-> On `feature/full-search` branch: 
+> **_Note:_**
+> Additional search function on `feature/full-search` branch: 
 > - Match search:  
 > `SearchByTitle(string title)`  
 > `SearchByAuthor(string author)`  
