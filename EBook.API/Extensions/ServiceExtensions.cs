@@ -4,6 +4,8 @@
     using EBook.Persistence.Contracts;
     using EBook.Services;
     using EBook.Services.Contracts;
+    using EBook.Services.Contracts.Convert;
+    using EBook.Services.Convert;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
@@ -20,7 +22,10 @@
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IEBooksSearchService, EBooksSearchService>();
             services.AddScoped<IEBooksFilterService, EBooksFilterService>();
+            services.AddScoped<IEBookRepositoryService, EBookRepositoryService>();
             services.AddScoped<IEBookServicesWrapper, EBookServicesWrapper>();
+
+            services.AddScoped<IFilePdfConverter, PdfConverter>();
         }
 
         public static void AddRepositories(this IServiceCollection services)

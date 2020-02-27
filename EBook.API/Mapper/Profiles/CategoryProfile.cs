@@ -8,7 +8,7 @@
     {
         public CategoryProfile()
         {
-            CreateMap<Category, CategoryDto>();
+            CreateMap<Category, CategoryDto>().ReverseMap();
         }
     }
 }

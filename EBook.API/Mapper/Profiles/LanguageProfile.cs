@@ -8,7 +8,7 @@
     {
         public LanguageProfile()
         {
-            CreateMap<Language, LanguageDto>();
+            CreateMap<Language, LanguageDto>().ReverseMap();
         }
     }
 }

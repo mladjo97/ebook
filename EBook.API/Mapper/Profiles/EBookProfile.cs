@@ -8,7 +8,10 @@
     {
         public EBookProfile()
         {
-            CreateMap<Book, BookDto>();
+            CreateMap<Book, BookDto>().ReverseMap();
+            CreateMap<PostBookDto, Book>()
+                .ForPath(dest => dest.File.Filename, opts => opts.MapFrom(src => src.File.FileName))
+                .ForPath(dest => dest.File.Mime, opts => opts.MapFrom(src => src.File.ContentType));
         }
     }
 }

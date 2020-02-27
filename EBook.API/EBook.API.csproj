@@ -22,4 +22,8 @@
     <ProjectReference Include="..\EBook.Services\EBook.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\ebooks\" />
+  </ItemGroup>
+
 </Project>

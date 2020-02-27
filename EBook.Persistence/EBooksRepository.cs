@@ -26,9 +26,19 @@
             return response.Documents;
         }
 
-        public Task<Book> Create(Book entity)
+        public async Task<Book> Create(Book entity)
         {
-            throw new NotImplementedException();
+            var response = await _client.CreateAsync(
+                    entity,
+                    s => s
+                );
+
+            if (!response.IsValid)
+                throw new Exception(response.DebugInformation, response.OriginalException);
+
+            // @TODO:
+            // - Check how to get newly created ebook
+            return entity;
         }
 
         public Task<int> Delete(int primaryKey)

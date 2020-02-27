@@ -3,9 +3,11 @@
     using AutoMapper;
     using EBook.API.Models;
     using EBook.API.Models.Dto;
+    using EBook.Domain;
     using EBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
 
     [ApiController]
@@ -19,6 +21,30 @@
         {
             _mapper = mapper;
             _eBookServices = eBookServices;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromForm]PostBookDto model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            // @TODO:
+            // - move this logic elsewhere
+            var filePath = Path.Combine("wwwroot/ebooks", model.File.FileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                model.File.CopyTo(fileStream);
+            }
+
+            var book = _mapper.Map<Book>(model);
+            book.File.Path = filePath;
+
+            var createdBook = await _eBookServices.RepositoryService.Create(book);
+
+            var bookDto = _mapper.Map<BookDto>(createdBook);
+
+            return Ok(bookDto);
         }
 
         [HttpGet]

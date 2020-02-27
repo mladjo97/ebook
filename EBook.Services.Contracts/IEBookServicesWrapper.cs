@@ -4,5 +4,6 @@
     {
         IEBooksSearchService SearchService { get; }
         IEBooksFilterService FilterService { get; }
+        IEBookRepositoryService RepositoryService { get; }
     }
 }
