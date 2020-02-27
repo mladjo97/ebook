@@ -72,8 +72,13 @@
         {
             try
             {
-                var eBooks = await _eBooksRepository.Search(query.IsSatisfiedBy());
-                return eBooks;
+                var response = await _eBooksRepository.Search(query.IsSatisfiedBy());
+
+                // @Note:
+                // - we can apply some other models like Paginated or Highlighted 
+                //   with additional api response information here
+                //   or change the function alltogether (its private)
+                return response.Documents;
             }
             catch (Exception)
             {

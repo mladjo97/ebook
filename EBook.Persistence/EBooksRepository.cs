@@ -16,14 +16,14 @@
             _client = client;
         }
 
-        public async Task<IEnumerable<Book>> Search(ISearchRequest<Book> query)
+        public async Task<ISearchResponse<Book>> Search(ISearchRequest<Book> query)
         {
             var response = await _client.SearchAsync<Book>(query);
 
             if (!response.IsValid)
                 throw new Exception(response.DebugInformation, response.OriginalException);
 
-            return response.Documents;
+            return response;
         }
 
         public async Task<Book> Create(Book entity)

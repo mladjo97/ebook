@@ -17,7 +17,7 @@
                 var file = new File
                 {
                     Path = path,
-                    Mime = "application/json"
+                    Mime = "application/pdf"
                 };
 
                 using (var document = new PdfDocument(new PdfReader(path)))
