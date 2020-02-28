@@ -12,19 +12,15 @@
 
         public override ISearchRequest<T> IsSatisfiedBy()
             => new SearchDescriptor<T>()
-                .Query(q => q
-                    .Bool(b => b
-                        .Should(
-                            _query
-                            .IsSatisfiedBy()
-                            .Query
-                        )
-                    )
+                .Query(q => _query
+                    .IsSatisfiedBy()
+                    .Query
                 )
                 // This will highlight all queried fields
                 .Highlight(h => h
                     .PreTags("<strong>")
                     .PostTags("</strong>")
+                    .FragmentSize(150)
                     .Fields(f => f
                         .Field("*")
                     )

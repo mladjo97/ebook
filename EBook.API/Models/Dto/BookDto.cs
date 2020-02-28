@@ -1,6 +1,8 @@
 ﻿namespace EBook.API.Models.Dto
 {
+    using EBook.Services.Contracts.Query;
     using Microsoft.AspNetCore.Http;
+    using System.Collections.Generic;
 
     public class BookDto
     {
@@ -13,6 +15,11 @@
         public FileDto File { get; set; }
         public CategoryDto Category { get; set; }
         public LanguageDto Language { get; set; }
+    }
+
+    public class HighlightableBookDto : BookDto, IHighlightable
+    {
+        public IReadOnlyDictionary<string, IReadOnlyCollection<string>> Highlights { get; set; }
     }
 
     // for testing pdf upload - not the actual model

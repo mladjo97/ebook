@@ -7,5 +7,6 @@
         string Keywords { get; set; }
         string Language { get; set; }
         string Category { get; set; }
+        string Content { get; set; }
     }
 }

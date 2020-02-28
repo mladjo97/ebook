@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     [ApiController]
@@ -78,9 +79,12 @@
                 ? await _eBookServices.SearchService.FuzzySearch(options)
                 : await _eBookServices.SearchService.Search(options);
 
-            var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
+            // @TODO:
+            // - Fix mapper
+            foreach (var book in books.Items)
+                book.File.Content = string.Empty;
 
-            return Ok(booksDto);
+            return Ok(books);
         }
 
     }

@@ -42,6 +42,10 @@
                             .Name(na => na.Id)
                             .Type(NumberType.Integer)
                         )
+                        .Text(t => t
+                            .Name(n => n.File.Content)
+                            .Analyzer("standard")
+                        )
                     )
                 )
             );
