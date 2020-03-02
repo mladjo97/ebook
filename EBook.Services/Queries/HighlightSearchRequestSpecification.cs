@@ -24,6 +24,7 @@
                     .NumberOfFragments(2)
                     .Fields(f => f
                         .Field("*")
+                        .ForceSource()
                     )
                 );
     }

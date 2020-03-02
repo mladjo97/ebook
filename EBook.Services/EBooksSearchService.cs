@@ -40,6 +40,9 @@
             if (!string.IsNullOrEmpty(options.Keywords))
                 filterQueries.Add(new EBookKeywordsQuery(options.Keywords));
 
+            if (!string.IsNullOrEmpty(options.Content))
+                filterQueries.Add(new EBookContentQuery(options.Content));
+
             var andQuery = new AndSearchRequestSpecification<Book>(filterQueries);
 
             return await Search(andQuery, options.Page, options.Size);
