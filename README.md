@@ -37,6 +37,9 @@ public interface IEBookSearchOptions
     string Keywords { get; set; }
     string Language { get; set; }
     string Category { get; set; }
+    
+    int Page { get; set; }
+    int Size { get; set; }
 }
 ```
 
@@ -69,6 +72,9 @@ public interface IEBookFilterOptions
     string Keywords { get; set; }
     string Language { get; set; }
     string Category { get; set; }
+
+    int Page { get; set; }
+    int Size { get; set; }
 }
 ```
 
@@ -80,3 +86,40 @@ Without fuzzy filter:
 With fuzzy filter:  
 `GET /api/ebooks/filter?author=gorge&title=catc 25&fuzzy=true`
 
+## Example response:  
+
+```
+{
+    "total": 2,
+    "page": 1,
+    "size": 2,
+    "items": [
+        {
+            "highlights": {
+                "file.content": [
+                    "Ut ac <strong>dolor</strong>\nLorem ipsum <strong>dolor</strong> sit amet, consectetur adipiscing Lorem ipsum <strong>dolor</strong> sit amet, consectetur adipiscing Lorem ipsum <strong>dolor</strong> sit amet, consectetur",
+                    "Ut ac <strong>dolor</strong>\nLorem ipsum <strong>dolor</strong> sit amet, consectetur adipiscing Lorem ipsum <strong>dolor</strong> sit amet, consectetur adipiscing Lorem ipsum <strong>dolor</strong> sit amet, consectetur"
+                ]
+            },
+            "id": 2,
+            "title": "Example book",
+            "author": "Example author",
+            "keywords": "example dummy content test",
+            "publicationYear": 2020,
+            "file": {
+                "path": "path-to-pdf-location\\example.pdf",
+                "mime": "application/pdf",
+                "filename": "example.pdf"
+            },
+            "category": {
+                "id": 6,
+                "name": "Tech"
+            },
+            "language": {
+                "id": 1,
+                "name": "English"
+            }
+    },
+    ... other items ...
+}
+```

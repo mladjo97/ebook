@@ -84,7 +84,7 @@
                 {
                     Items = response.Hits.Select(h => MapBook(h)),
                     Total = (int)response.Total,
-                    Page = page,
+                    Page = page + 1,
                     Size = response.Documents.Count
                 };
             }
@@ -94,6 +94,9 @@
             }
         }
 
+        // @TODO:
+        // - DRY
+        // - Place this map elsewhere
         private HighlightableEBook MapBook(IHit<Book> hit)
             => new HighlightableEBook
             {

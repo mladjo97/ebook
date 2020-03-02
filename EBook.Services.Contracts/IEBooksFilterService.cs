@@ -1,13 +1,12 @@
 ﻿namespace EBook.Services.Contracts
 {
-    using EBook.Domain;
     using EBook.Services.Contracts.Filter;
-    using System.Collections.Generic;
+    using EBook.Services.Contracts.Query;
     using System.Threading.Tasks;
 
     public interface IEBooksFilterService
     {
-        Task<IEnumerable<Book>> Filter(IEBookFilterOptions options);
-        Task<IEnumerable<Book>> FuzzyFilter(IEBookFilterOptions options);
+        Task<IEBookElasticQueryable> Filter(IEBookFilterOptions options);
+        Task<IEBookElasticQueryable> FuzzyFilter(IEBookFilterOptions options);
     }
 }

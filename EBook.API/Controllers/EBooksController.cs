@@ -6,9 +6,7 @@
     using EBook.Domain;
     using EBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
 
     [ApiController]
@@ -61,7 +59,7 @@
                 ? await _eBookServices.FilterService.FuzzyFilter(options)
                 : await _eBookServices.FilterService.Filter(options);
 
-            var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
+            var booksDto = _mapper.Map<EBookElasticQueryableDto>(books);
 
             return Ok(booksDto);
         }
@@ -79,12 +77,9 @@
                 ? await _eBookServices.SearchService.FuzzySearch(options)
                 : await _eBookServices.SearchService.Search(options);
 
-            // @TODO:
-            // - Fix mapper
-            foreach (var book in books.Items)
-                book.File.Content = string.Empty;
+            var booksDto = _mapper.Map<EBookElasticQueryableDto>(books);
 
-            return Ok(books);
+            return Ok(booksDto);
         }
 
     }

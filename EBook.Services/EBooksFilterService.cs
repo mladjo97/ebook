@@ -4,11 +4,15 @@
     using EBook.Persistence.Contracts;
     using EBook.Services.Contracts;
     using EBook.Services.Contracts.Filter;
+    using EBook.Services.Contracts.Query;
+    using EBook.Services.Models;
     using EBook.Services.Queries;
     using EBook.Services.Queries.Fuzzy;
     using EBook.Services.Queries.Match;
+    using Nest;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class EBooksFilterService : IEBooksFilterService
@@ -18,7 +22,7 @@
         public EBooksFilterService(IEBooksRepository eBooksRepository)
             => _eBooksRepository = eBooksRepository;
 
-        public async Task<IEnumerable<Book>> Filter(IEBookFilterOptions options)
+        public async Task<IEBookElasticQueryable> Filter(IEBookFilterOptions options)
         {
             var filterQueries = new List<SearchRequestSpecification<Book>>();
 
@@ -39,10 +43,10 @@
 
             var orQuery = new OrSearchRequestSpecification<Book>(filterQueries);
 
-            return await Search(orQuery);
+            return await Search(orQuery, options.Page, options.Size);
         }
 
-        public async Task<IEnumerable<Book>> FuzzyFilter(IEBookFilterOptions options)
+        public async Task<IEBookElasticQueryable> FuzzyFilter(IEBookFilterOptions options)
         {
             var filterQueries = new List<SearchRequestSpecification<Book>>();
 
@@ -63,26 +67,47 @@
 
             var orQuery = new OrSearchRequestSpecification<Book>(filterQueries);
 
-            return await Search(orQuery);
+            return await Search(orQuery, options.Page, options.Size);
         }
 
-        private async Task<IEnumerable<Book>> Search(SearchRequestSpecification<Book> query)
+        private async Task<IEBookElasticQueryable> Search(SearchRequestSpecification<Book> query, int page, int size)
         {
             try
             {
-                var response = await _eBooksRepository.Search(query.IsSatisfiedBy());
+                var highlightQuery = new HighlightSearchRequestSpecification<Book>(query);
+                var paginationQuery = new PaginatedSearchRequestSpecification<Book>(highlightQuery, page, size);
 
-                // @Note:
-                // - we can apply some other models like Paginated or Highlighted 
-                //   with additional api response information here
-                //   or change the function alltogether (its private)
-                return response.Documents;
+                var response = await _eBooksRepository.Search(highlightQuery.IsSatisfiedBy());
+
+                return new EBookElasticQueryable
+                {
+                    Items = response.Hits.Select(h => MapBook(h)),
+                    Total = (int)response.Total,
+                    Page = page + 1,
+                    Size = response.Documents.Count
+                };
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        // @TODO:
+        // - place this map elsewhere
+        private HighlightableEBook MapBook(IHit<Book> hit)
+            => new HighlightableEBook
+            {
+                Author = hit.Source.Author,
+                Category = hit.Source.Category,
+                File = hit.Source.File,
+                Id = hit.Source.Id,
+                Keywords = hit.Source.Keywords,
+                Language = hit.Source.Language,
+                PublicationYear = hit.Source.PublicationYear,
+                Title = hit.Source.Title,
+                Highlights = hit.Highlight
+            };
 
     }
 }

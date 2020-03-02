@@ -21,6 +21,7 @@
                     .PreTags("<strong>")
                     .PostTags("</strong>")
                     .FragmentSize(150)
+                    .NumberOfFragments(2)
                     .Fields(f => f
                         .Field("*")
                     )
