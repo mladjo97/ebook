@@ -1,0 +1,12 @@
+.search-form {
+  vertical-align: middle;
+  display: inline-block;
+  width: 100%;
+}
+
+.search-form > Button {
+  height: 35px;
+  width: 120px;
+  margin-left: 50px;
+  margin-top: 10px;
+}

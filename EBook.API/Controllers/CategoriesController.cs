@@ -34,12 +34,13 @@
         public async Task<IActionResult> Get()
         {
             foreach (var category in _categories)
-                category.EBooks = _mapper.Map<IEnumerable<BookDto>>(
-                    await _eBooksService.Search(
+            {
+                var searchResult = await _eBooksService.Search(
                             new EBookSearchOptions { Category = category.Name }
-                        )
-                    );
+                        );
 
+                category.EBooks = _mapper.Map<IEnumerable<BookDto>>(searchResult.Items);
+            }
             return Ok(_categories);
         }
 

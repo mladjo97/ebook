@@ -40,8 +40,7 @@
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
+                    .AllowAnyHeader());
             });
 
         public static void ConfigureAuthorization(this IServiceCollection services, IConfiguration config)
