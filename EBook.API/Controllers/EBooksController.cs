@@ -31,7 +31,7 @@
             // @TODO:
             // - move this logic elsewhere
             var filePath = $"{this.Request.Scheme}://{this.Request.Host}/ebooks/{model.File.FileName.Replace(" ", "").Trim()}";
-            var serverFilePath = Path.Combine("wwwroot", model.File.FileName);
+            var serverFilePath = Path.Combine("wwwroot/ebooks", model.File.FileName);
 
             using (var fileStream = new FileStream(serverFilePath, FileMode.Create))
             {

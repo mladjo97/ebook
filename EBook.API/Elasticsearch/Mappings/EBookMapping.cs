@@ -44,7 +44,7 @@
                         )
                         .Text(t => t
                             .Name(n => n.File.Content)
-                            .Analyzer("standard")
+                            .Analyzer("standard_english")
                         )
                     )
                 )

@@ -1,3 +1,0 @@
-﻿- Kakva je praksa prilikom pretrage i povratka informacija? 
-  Npr. ako trazim knjige, da li se vracaju samo knjige iz funkcije repo-a ili treba
-  sve da se vrati ? (highlight, count, total ..)

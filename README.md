@@ -1,5 +1,9 @@
 # E-Book Repository API
 
+## Content search example
+
+![Content Search](./docs/content.png)
+
 ## Search
 
 Search uses Boolean *AND* Query for all given query options.  

@@ -18,7 +18,8 @@ const Search = ({ label, submitHandler }) => {
     <div className="search-form">
       <TextField id="standard-basic"
         label={`${label}`}
-        onChange={onQueryChangeHandler} />
+        onChange={onQueryChangeHandler}
+        autoComplete="off" />
 
       <Button onClick={onSubmit}
         variant="outlined"

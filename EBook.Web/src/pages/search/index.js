@@ -5,6 +5,8 @@ import Search from '../../components/search';
 import EBooks from '../../components/ebooks';
 import { searchEBooks } from '../../redux/actions/ebooks';
 
+import './index.css';
+
 const SearchPage = () => {
 
   const dispatch = useDispatch();
@@ -16,10 +18,10 @@ const SearchPage = () => {
   }
 
   return (
-    <React.Fragment>
+    <div className="search-page">
       <Search label="E-Book content" submitHandler={onSubmitHandler} />
       <EBooks />
-    </React.Fragment>
+    </div>
   )
 };
 
