@@ -5,10 +5,10 @@ export const SEARCH_EBOOKS_REQUEST = 'SEARCH_EBOOKS_REQUEST';
 export const SEARCH_EBOOKS_SUCCESS = 'SEARCH_EBOOKS_SUCCESS';
 export const SEARCH_EBOOKS_FAILURE = 'SEARCH_EBOOKS_FAILURE';
 
-export const searchEBooks = title => dispatch => {
+export const searchEBooks = content => dispatch => {
   return dispatch({
     [RSAA]: {
-      endpoint: `${config.api.baseUrl}/ebooks/search?title=${title}&fuzzy=true`,
+      endpoint: `${config.api.baseUrl}/ebooks/search?content=${content}&fuzzy=false`,
       method: 'GET',
       types: [
         SEARCH_EBOOKS_REQUEST,

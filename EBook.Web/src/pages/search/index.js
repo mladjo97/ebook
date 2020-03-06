@@ -17,7 +17,7 @@ const SearchPage = () => {
 
   return (
     <React.Fragment>
-      <Search label="E-Book title" submitHandler={onSubmitHandler} />
+      <Search label="E-Book content" submitHandler={onSubmitHandler} />
       <EBooks />
     </React.Fragment>
   )

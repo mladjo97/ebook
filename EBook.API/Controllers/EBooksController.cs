@@ -30,18 +30,21 @@
 
             // @TODO:
             // - move this logic elsewhere
-            var filePath = Path.Combine("wwwroot/ebooks", model.File.FileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            var filePath = $"{this.Request.Scheme}://{this.Request.Host}/ebooks/{model.File.FileName.Replace(" ", "").Trim()}";
+            var serverFilePath = Path.Combine("wwwroot", model.File.FileName);
+
+            using (var fileStream = new FileStream(serverFilePath, FileMode.Create))
             {
                 model.File.CopyTo(fileStream);
             }
 
             var book = _mapper.Map<Book>(model);
-            book.File.Path = filePath;
+            book.File.Path = serverFilePath;
 
             var createdBook = await _eBookServices.RepositoryService.Create(book);
 
             var bookDto = _mapper.Map<BookDto>(createdBook);
+            bookDto.File.Path = filePath;
 
             return Ok(bookDto);
         }

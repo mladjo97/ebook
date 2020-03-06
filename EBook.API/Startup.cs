@@ -41,6 +41,7 @@
             }
 
             app.UseCors("CorsPolicy");
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

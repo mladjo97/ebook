@@ -8,21 +8,21 @@ import './index.css';
 
 const EBook = ({ eBook }) => {
 
-  const { author, highlights } = eBook;
+  const { author, title, highlights } = eBook;
 
-  const highlightedTitle = highlights.title[0];
+  const highlightedContent = highlights["file.content"][0]; 
 
   return (
     <Card variant="outlined" className="ebook-card">
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
-          {author}
+          { author }
         </Typography>
         <Typography variant="h5" component="h2">
-          { highlightedTitle }
+          { title }
         </Typography>
         <Typography variant="body2" component="p">
-          {'Content preview here ...'}
+          { `... ${highlightedContent} ...` }
         </Typography>
       </CardContent>
       <CardActions>
